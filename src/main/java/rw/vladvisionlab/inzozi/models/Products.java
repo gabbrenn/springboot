@@ -7,10 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-// import lombok.Data;
+import lombok.Data;
 
 @Entity
-// @Data
+@Data
 public class Products {
 
     @Id

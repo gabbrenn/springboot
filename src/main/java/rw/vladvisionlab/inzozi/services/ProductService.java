@@ -31,14 +31,16 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    // public Products updateProduct(Long id, Products updatedProduct) {
-    //     return productRepository.findById(id)
-    //             .map(product -> {
-    //                 product.setProductName(updatedProduct.getProductName());
-    //                 product.setPrice(updatedProduct.getPrice());
-    //                 return productRepository.save(product);
-    //             })
-    //             .orElseThrow(() -> new RuntimeException("Product not found with id " + id));
-    // }
+    public Products updateProduct(Long id, Products updatedProduct) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    product.setProductName(updatedProduct.getProductName());
+                    product.setPrice(updatedProduct.getPrice());
+                    product.setDescription(updatedProduct.getDescription());
+                    product.setQuantity(updatedProduct.getQuantity());
+                    return productRepository.save(product);
+                })
+                .orElseThrow(() -> new RuntimeException("Product not found with id " + id));
+    }
 
 }
