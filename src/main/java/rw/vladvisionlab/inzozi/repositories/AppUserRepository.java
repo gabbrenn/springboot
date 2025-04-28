@@ -7,6 +7,6 @@ import rw.vladvisionlab.inzozi.models.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface UserRepository extends JpaRepository<AppUser, Long> {
-    Optional<AppUser> findByUsername(String username);
+public interface AppUserRepository extends JpaRepository<AppUser, Long> {
+    Optional<AppUser> findByEmail(String username);
 }
