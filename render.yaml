@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: inzozi-app
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    startCommand: "java -jar app.jar"
+    envVars:
+      - key: PORT
+        value: 8080
