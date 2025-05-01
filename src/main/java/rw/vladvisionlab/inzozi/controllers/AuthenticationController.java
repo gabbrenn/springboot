@@ -1,6 +1,7 @@
 package rw.vladvisionlab.inzozi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rw.vladvisionlab.inzozi.dtos.AuthenticationRequest;
 import rw.vladvisionlab.inzozi.dtos.AuthenticationResponse;
@@ -15,11 +16,11 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public AuthenticationResponse register(
-            @RequestBody RegisterRequest request
-    ) {
-        return authenticationService.register(request);
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+        authenticationService.register(request);
+        return ResponseEntity.ok("User registered successfully");
     }
+    
 
     @PostMapping("/login")  // Updated endpoint to match security config
     public AuthenticationResponse authenticate(

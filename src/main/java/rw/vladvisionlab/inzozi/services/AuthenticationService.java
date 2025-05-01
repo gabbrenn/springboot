@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-// import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import rw.vladvisionlab.inzozi.dtos.AuthenticationRequest;
@@ -19,7 +18,6 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-    // private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final AppUserRepository appUserRepository;
 
@@ -41,22 +39,22 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse register(RegisterRequest request){
+    public void register(RegisterRequest request) {
+        // Check if email already exists
+        if (appUserRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email is already registered");
+        }
+    
         // Map RegisterRequest to AppUser model
         AppUser newUser = AppUser.builder()
-            .firstname(request.getFirstname())
-            .lastname(request.getLastname())
-            .email(request.getEmail())
-            .password(passwordEncoder.encode(request.getPassword()))
-            .build();
-        
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .build();
+    
         // Save the new user to the database
         appUserRepository.save(newUser);
-
-         // Optionally, generate a JWT token for the newly registered user
-         String token = jwtService.generateToken(newUser.getEmail());
-
-         // Return a response with the token
-        return AuthenticationResponse.builder().token(token).build();
     }
+    
 }

@@ -3,8 +3,8 @@ package rw.vladvisionlab.inzozi.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rw.vladvisionlab.inzozi.services.ProductService;
 import rw.vladvisionlab.inzozi.models.Products;
@@ -38,7 +38,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProductById(@PathVariable Long id){
+    public ResponseEntity<?> deleteProductById(@PathVariable Long id){
         productService.deleteProduct(id);
+        return ResponseEntity.ok("Product deleted successfully");
     }
 }

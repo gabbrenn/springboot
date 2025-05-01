@@ -30,7 +30,6 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // Public endpoints (e.g., login, register)
                         // .requestMatchers("/api/products/**").authenticated()
-                        .requestMatchers("/api/products/**").permitAll()
                         .anyRequest().authenticated() // All other endpoints need authentication
                 )
                 .sessionManagement(session -> session
