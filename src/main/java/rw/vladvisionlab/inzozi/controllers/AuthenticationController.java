@@ -10,6 +10,7 @@ import rw.vladvisionlab.inzozi.services.AuthenticationService;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:56374")
 public class AuthenticationController {
 
     @Autowired
